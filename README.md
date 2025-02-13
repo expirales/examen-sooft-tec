@@ -35,7 +35,7 @@ git clone https://github.com/expirales/examen-sooft-tec.git
 Then to install dependencies execute the following lines:
 
 ```bash
-cd mi-proyecto
+cd examen-sooft-tec
 npm install
 ```
 
