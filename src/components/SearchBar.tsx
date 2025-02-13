@@ -80,6 +80,7 @@ export default function SearchBar() {
                 className="btn-results"
                 onClick={handleFilterAllItems}
                 aria-label={`See all ${filteredItems.length} results`}
+                disabled={filteredItems.length === 0}
               >
                 See {filteredItems.length} results
               </button>
