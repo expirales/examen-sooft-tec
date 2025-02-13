@@ -25,7 +25,7 @@
     border-radius: $space-3;
     width: 500px;
     outline: 0;
-    border: 1px solid black;
+    border: 1px solid transparent;
     padding: $space-1;
     font-size: 1rem;
   }
@@ -37,7 +37,7 @@
     overflow-y: auto;
     margin-top: 56px;
     background-color: #1a1a1a;
-    border: 1px solid $border-color-primary;
+    border: 1px solid transparent;
     border-radius: calc($space-1 / 2);
     padding: $space-1;
     list-style: none;

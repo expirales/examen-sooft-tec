@@ -11,6 +11,13 @@ The goal of this project is to create a "Challenge" that allows users to visuali
 - Visualization in a Grid: The phrases are displayed in a card format in the interface.
 - Search: Users can search for specific phrases using a search bar.
 
+#### Screenshots preview
+
+![alt text](src/assets/image.png)
+![alt text](src/assets/image-3.png)
+![alt text](src/assets/image-7.png)
+![alt text](src/assets/image-6.png)
+
 ## 1. Project Installation
 
 ### Step 1: install dependencies

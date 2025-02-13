@@ -4,7 +4,7 @@ import './ListGrid.scss'
 
 type ListGridProps<T> = {
   items: T[]
-  renderItem: (item: T) => React.ReactNode
+  renderItem: (item: T, index: number) => React.ReactNode
   gridLayoutSettings?: {
     columns: number
     rows: number
@@ -94,9 +94,7 @@ export default function ListGrid<T>({
       })}
       data-testid="list-grid"
     >
-      {displayedItems.map((item, index) => (
-        <div key={index}>{renderItem(item)}</div>
-      ))}
+      {displayedItems.map((item, index) => renderItem(item, index))}
       <button
         ref={loaderRef}
         disabled={displayedItems.length === items.length}

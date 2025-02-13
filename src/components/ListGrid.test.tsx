@@ -1,46 +1,40 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
 import ListGrid from './ListGrid'
+import '@testing-library/jest-dom'
 import 'intersection-observer'
+
 describe('ListGrid', () => {
-  const mockItems = Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`)
-  const renderItem = (item: string) => <div>{item}</div>
+  const items = Array.from({ length: 20 }, (_, i) => `Item ${i + 1}`)
+  const renderItem = (item: string) => <div key={item}>{item}</div>
 
-  test('renders ListGrid component with initial items', () => {
-    render(<ListGrid items={mockItems} renderItem={renderItem} />)
-    expect(screen.getByTestId('list-grid')).toBeInTheDocument()
-    mockItems.slice(0, 10).forEach((item) => {
-      expect(screen.getByText(item)).toBeInTheDocument()
-    })
+  test('renders initial items', () => {
+    render(<ListGrid items={items} renderItem={renderItem} />)
+    const displayedItems = screen.getAllByText(/Item \d+/)
+    expect(displayedItems).toHaveLength(10)
   })
 
-  test('renders Load More button', () => {
-    render(<ListGrid items={mockItems} renderItem={renderItem} />)
-    expect(screen.getByText('Load More')).toBeInTheDocument()
+  test('disables load more button when all items are loaded', () => {
+    render(<ListGrid items={items.slice(0, 10)} renderItem={renderItem} />)
+    const loadMoreButton = screen.getByRole('button', { name: /Load More/i })
+    expect(loadMoreButton).toBeDisabled()
   })
 
-  test('disables Load More button when all items are loaded', () => {
-    render(<ListGrid items={mockItems.slice(0, 10)} renderItem={renderItem} />)
-    expect(screen.getByText('Load More')).toBeDisabled()
-  })
-
-  test('renders all items when isFiltered is true', () => {
-    render(<ListGrid items={mockItems} renderItem={renderItem} isFiltered />)
-    mockItems.forEach((item) => {
-      expect(screen.getByText(item)).toBeInTheDocument()
-    })
+  test('renders all items when filtered', () => {
+    render(<ListGrid items={items} renderItem={renderItem} isFiltered={true} />)
+    const displayedItems = screen.getAllByText(/Item \d+/)
+    expect(displayedItems).toHaveLength(20)
   })
 
   test('applies correct grid layout settings', () => {
     render(
       <ListGrid
-        items={mockItems}
+        items={items}
         renderItem={renderItem}
         gridLayoutSettings={{ columns: 3, rows: 5 }}
       />
     )
-    const listGrid = screen.getByTestId('list-grid')
-    expect(listGrid).toHaveClass('row-5')
-    expect(listGrid).toHaveClass('column-3')
+    const grid = screen.getByTestId('list-grid')
+    expect(grid).toHaveClass('column-3')
+    expect(grid).toHaveClass('row-5')
   })
 })

@@ -21,6 +21,7 @@ export default function HomePage() {
           onClick={() => setIsModalOpen(true)}
           aria-label="Add new text"
           role="button"
+          disabled={isFiltered}
         >
           + Add
         </button>
@@ -38,7 +39,7 @@ export default function HomePage() {
       <ListGrid
         items={items}
         renderItem={({ id, text }: Text) => (
-          <TextCard id={id} text={text} onHandleRemoveText={removeItem} />
+          <TextCard key={id} id={id} text={text} onHandleRemoveText={removeItem} />
         )}
         isFiltered={isFiltered}
         gridLayoutSettings={{
@@ -47,7 +48,11 @@ export default function HomePage() {
         }}
       />
       {isModalOpen && (
-        <AddTextModal onHandleClose={() => setIsModalOpen(false)} onHandleSubmit={addItem} />
+        <AddTextModal
+          onHandleClose={() => setIsModalOpen(false)}
+          onHandleSubmit={addItem}
+          isOpen={isModalOpen}
+        />
       )}
     </div>
   )

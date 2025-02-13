@@ -14,7 +14,9 @@ describe('AddTextModal', () => {
   })
 
   test('renders AddTextModal component', () => {
-    render(<AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} />)
+    render(
+      <AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} isOpen={true} />
+    )
     expect(screen.getByText('Add new phrase')).toBeInTheDocument()
     expect(screen.getByPlaceholderText('Write something here...')).toBeInTheDocument()
     expect(screen.getByText('Close')).toBeInTheDocument()
@@ -22,18 +24,24 @@ describe('AddTextModal', () => {
   })
 
   test('calls onHandleClose when Close button is clicked', () => {
-    render(<AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} />)
+    render(
+      <AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} isOpen={true} />
+    )
     fireEvent.click(screen.getByText('Close'))
     expect(onHandleClose).toHaveBeenCalledTimes(1)
   })
 
   test('disables Save button when textarea is empty', () => {
-    render(<AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} />)
+    render(
+      <AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} isOpen={true} />
+    )
     expect(screen.getByText('Save')).toBeDisabled()
   })
 
   test('enables Save button when textarea is not empty', () => {
-    render(<AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} />)
+    render(
+      <AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} isOpen={true} />
+    )
     fireEvent.change(screen.getByPlaceholderText('Write something here...'), {
       target: { value: 'Test text' },
     })
@@ -43,7 +51,9 @@ describe('AddTextModal', () => {
   test('calls onHandleSubmit with correct data when Save button is clicked', () => {
     const mockId = '12345'
     ;(randomId as jest.Mock).mockReturnValue(mockId)
-    render(<AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} />)
+    render(
+      <AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} isOpen={true} />
+    )
     fireEvent.change(screen.getByPlaceholderText('Write something here...'), {
       target: { value: 'Test text' },
     })
@@ -52,7 +62,9 @@ describe('AddTextModal', () => {
     expect(onHandleClose).toHaveBeenCalledTimes(1)
   })
   test('clears textarea after Save button is clicked', () => {
-    render(<AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} />)
+    render(
+      <AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} isOpen={true} />
+    )
     fireEvent.change(screen.getByPlaceholderText('Write something here...'), {
       target: { value: 'Test text' },
     })
@@ -61,13 +73,17 @@ describe('AddTextModal', () => {
   })
 
   test('does not call onHandleSubmit if textarea is empty', () => {
-    render(<AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} />)
+    render(
+      <AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} isOpen={true} />
+    )
     fireEvent.click(screen.getByText('Save'))
     expect(onHandleSubmit).not.toHaveBeenCalled()
   })
 
   test('does not call onHandleClose if textarea is empty and Save button is clicked', () => {
-    render(<AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} />)
+    render(
+      <AddTextModal onHandleClose={onHandleClose} onHandleSubmit={onHandleSubmit} isOpen={true} />
+    )
     fireEvent.click(screen.getByText('Save'))
     expect(onHandleClose).not.toHaveBeenCalled()
   })
