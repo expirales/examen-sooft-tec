@@ -14,6 +14,29 @@ type ListGridProps<T> = {
 
 const MAX_ITEMS = 10
 
+/**
+ * A generic grid component that displays a list of items with infinite scrolling support.
+ *
+ * @template T - The type of the items to be displayed in the grid.
+ *
+ * @param {ListGridProps<T>} props - The props for the ListGrid component.
+ * @param {T[]} [props.items=[]] - The list of items to be displayed in the grid.
+ * @param {(item: T) => React.ReactNode} props.renderItem - A function that renders an item.
+ * @param {GridLayoutSettings} props.gridLayoutSettings - Settings for the grid layout.
+ * @param {boolean} [props.isFiltered=false] - A flag indicating whether the items are filtered.
+ *
+ * @returns {JSX.Element} The rendered ListGrid component.
+ *
+ * @example
+ * ```tsx
+ * <ListGrid
+ *   items={myItems}
+ *   renderItem={(item) => <MyItemComponent item={item} />}
+ *   gridLayoutSettings={{ columns: 3, rows: 5 }}
+ *   isFiltered={false}
+ * />
+ * ```
+ */
 export default function ListGrid<T>({
   items = [],
   renderItem,

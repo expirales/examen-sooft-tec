@@ -7,6 +7,17 @@ type AddTextModalProps<T extends { text: string; id: number }> = {
   onHandleSubmit: (item: T) => void
 }
 
+/**
+ * A modal component for adding new text items.
+ *
+ * @template T - The type of the item to be added, which extends an object with `text` and `id` properties.
+ *
+ * @param {Object} props - The properties object.
+ * @param {() => void} props.onHandleClose - Function to handle closing the modal.
+ * @param {(item: T) => void} props.onHandleSubmit - Function to handle submitting the new item.
+ *
+ * @returns {JSX.Element} The rendered AddTextModal component.
+ */
 export default function AddTextModal<T extends { text: string; id: number }>({
   onHandleClose,
   onHandleSubmit,

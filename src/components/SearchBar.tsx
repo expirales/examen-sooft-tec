@@ -3,6 +3,57 @@ import { ChangeEvent, useState } from 'react'
 import { useFuseSearch } from '../hooks/useFuseSearch'
 import { useItems } from '../contexts/itemsContext'
 
+/**
+ * SearchBar component provides a search input field with suggestions and filtering capabilities.
+ * It allows users to search for items, filter them based on the search query, and clear the search and filters.
+ *
+ * @component
+ * @example
+ * return (
+ *   <SearchBar />
+ * )
+ *
+ * @returns {JSX.Element} The rendered SearchBar component.
+ *
+ * @function
+ * @name SearchBar
+ *
+ * @description
+ * This component uses the `useItems` hook to manage the state and actions related to items.
+ * It also uses the `useFuseSearch` hook to perform the search and filter the items based on the query.
+ *
+ * @hook
+ * @name useItems
+ * @description Custom hook to manage items and their filtering state.
+ *
+ * @hook
+ * @name useFuseSearch
+ * @description Custom hook to perform search using Fuse.js.
+ *
+ * @state {string} query - The current search query.
+ * @state {number} isShowSuggestions - The number of suggestions to show.
+ *
+ * @param {ChangeEvent<HTMLInputElement>} e - The change event from the search input.
+ *
+ * @method
+ * @name handleChange
+ * @description Handles the change event of the search input, updates the query state, and manages the visibility of suggestions.
+ *
+ * @method
+ * @name handleFilterItem
+ * @description Filters a single item based on its ID and hides the suggestions.
+ * @param {number} id - The ID of the item to filter.
+ *
+ * @method
+ * @name handleFilterAllItems
+ * @description Filters all items based on the current search query and hides the suggestions.
+ *
+ * @method
+ * @name handleCleanFilters
+ * @description Clears the search query and filters, and hides the suggestions.
+ *
+ * @returns {JSX.Element} The rendered SearchBar component.
+ */
 export default function SearchBar() {
   const { filterItem, filterAllItems, items, cleanFilterItems, isFiltered } = useItems()
   const [query, setQuery] = useState('')

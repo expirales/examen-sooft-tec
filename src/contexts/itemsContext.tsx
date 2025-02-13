@@ -108,8 +108,30 @@ type ItemsContextType = {
   totalItems: number
 }
 
+/**
+ * ItemsContext is a React context that provides an interface for managing a list of items.
+ * It includes methods for adding, removing, filtering, and cleaning filters on items.
+ */
 const ItemsContext = createContext<ItemsContextType | undefined>(undefined)
 
+/**
+ * Provides context for managing items with various operations such as adding, removing, and filtering items.
+ *
+ * @param {Object} props - The properties object.
+ * @param {ReactNode} props.children - The child components to be wrapped by the provider.
+ *
+ * @returns {JSX.Element} The ItemsContext provider component.
+ *
+ * @context
+ * @property {Item[]} items - The current list of filtered items.
+ * @property {function} addItem - Function to add a new item to the list.
+ * @property {function} removeItem - Function to remove an item from the list by its ID.
+ * @property {function} filterItem - Function to filter the list to only include the item with the specified ID.
+ * @property {function} filterAllItems - Function to filter the list to only include items with the specified IDs.
+ * @property {function} cleanFilterItems - Function to reset the filtered list to include all items.
+ * @property {boolean} isFiltered - Indicates whether the list is currently filtered.
+ * @property {number} totalItems - The total number of items in the list.
+ */
 export const ItemsProvider = ({ children }: { children: ReactNode }) => {
   const items = useRef(textArray)
   const isFiltered = useRef(false)
@@ -156,6 +178,15 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
   )
 }
 
+/**
+ * Custom hook to access the ItemsContext.
+ *
+ * This hook provides access to the ItemsContext and ensures that it is used within an ItemsProvider.
+ * If the hook is used outside of an ItemsProvider, it will throw an error.
+ *
+ * @returns {ItemsContextType} The context value from ItemsContext.
+ * @throws {Error} If the hook is used outside of an ItemsProvider.
+ */
 // eslint-disable-next-line react-refresh/only-export-components
 export const useItems = () => {
   const context = useContext(ItemsContext)
