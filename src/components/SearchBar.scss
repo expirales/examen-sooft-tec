@@ -13,20 +13,30 @@
 
     button {
       @include button;
-      position: absolute;
       background-color: $border-color-primary;
-      border-radius: $space-3;
-      margin-right: $space-1;
+      border: 1px solid transparent;
+      padding: 0.6em 1.2em;
+      font-size: 1em;
+      font-weight: 500;
+      font-family: inherit;
+      transition: border-color 0.25s;
+      background-color: #646cff;
+      border-bottom-left-radius: 0px;
+      border-top-left-radius: 0px;
+      border-bottom-right-radius: 24px;
+      border-top-right-radius: 24px;
+      height: 48px;
     }
   }
 
   .search-input {
     height: 32px;
-    border-radius: $space-3;
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
     width: 500px;
     outline: 0;
     border: 1px solid transparent;
-    padding: $space-1;
+    padding: 8px;
     font-size: 1rem;
   }
 
@@ -41,6 +51,11 @@
     border-radius: calc($space-1 / 2);
     padding: $space-1;
     list-style: none;
+
+    span {
+      float: inline-end;
+      color: #3b3e3d;
+    }
 
     .cnt-buttons {
       display: flex;
@@ -60,11 +75,15 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-    }
 
-    li:hover {
-      background-color: #3d3c3c;
-      border-color: #646cff;
+      &:hover {
+        background-color: #3d3c3c;
+        border-color: #646cff;
+
+        &:hover span {
+          color: #646cff;
+        }
+      }
     }
   }
 }

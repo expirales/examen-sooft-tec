@@ -53,10 +53,17 @@ export default function AddTextModal<T extends { text: string; id: number }>({
           ref={inputRef}
         />
         <div className="cnt-buttons">
-          <button className="btn-close" onClick={onHandleClose} role="button" aria-label="Close">
+          <button
+            className="btn-close"
+            onClick={onHandleClose}
+            role="button"
+            aria-label="Close"
+            title="Close"
+          >
             Close
           </button>
           <button
+            title="Save"
             className="btn-save"
             onClick={handleSave}
             disabled={isEmptyText || text.length <= 2}

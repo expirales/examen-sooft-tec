@@ -17,6 +17,7 @@ export default function HomePage() {
       <div className="cnt-header">
         <SearchBar />
         <button
+          title="Add new text"
           className="btn-add"
           onClick={() => setIsModalOpen(true)}
           aria-label="Add new text"
@@ -32,7 +33,7 @@ export default function HomePage() {
         </span>
         {isFiltered && (
           <p role="status" aria-live="polite">
-            Matches found ({items.length})
+            Matches found (<b>{items.length}</b>)
           </p>
         )}
       </div>

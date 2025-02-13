@@ -1,5 +1,4 @@
 import './TextCard.scss'
-
 type TextCardProps = {
   id: number
   text: string
@@ -20,6 +19,7 @@ export default function TextCard({ id, text, onHandleRemoveText }: TextCardProps
     <article key={id} className="cnt-text-card" data-testid="text-card">
       <p>{text}</p>
       <button
+        title="Delete"
         className="btn-delete"
         onClick={() => onHandleRemoveText && onHandleRemoveText(id)}
         aria-label="Delete"

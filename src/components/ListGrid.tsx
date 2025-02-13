@@ -96,6 +96,7 @@ export default function ListGrid<T>({
     >
       {displayedItems.map((item, index) => renderItem(item, index))}
       <button
+        title="Load More"
         ref={loaderRef}
         disabled={displayedItems.length === items.length}
         aria-label="Load More"

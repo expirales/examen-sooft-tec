@@ -22,5 +22,8 @@
 
   .btn-delete {
     @include button;
+    gap: $space-1;
+    display: flex;
+    padding: 0.4em 1em;
   }
 }
