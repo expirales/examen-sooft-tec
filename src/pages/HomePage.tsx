@@ -16,7 +16,12 @@ export default function HomePage() {
       <h1>Challenge</h1>
       <div className="cnt-header">
         <SearchBar />
-        <button className="btn-add" onClick={() => setIsModalOpen(true)} aria-label="Add new text">
+        <button
+          className="btn-add"
+          onClick={() => setIsModalOpen(true)}
+          aria-label="Add new text"
+          role="button"
+        >
           + Add
         </button>
       </div>

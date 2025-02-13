@@ -56,7 +56,7 @@ export default function SearchBar() {
           aria-describedby="search-input-description"
         />
         {(isFiltered || query) && (
-          <button onClick={handleCleanFilters} aria-label="Clear search and filters">
+          <button onClick={handleCleanFilters} aria-label="Clear search and filters" role="button">
             ✕
           </button>
         )}
@@ -76,6 +76,7 @@ export default function SearchBar() {
             ))}
             <div className="cnt-buttons">
               <button
+                role="button"
                 className="btn-results"
                 onClick={handleFilterAllItems}
                 aria-label={`See all ${filteredItems.length} results`}
@@ -83,6 +84,7 @@ export default function SearchBar() {
                 See {filteredItems.length} results
               </button>
               <button
+                role="button"
                 className="btn-close"
                 onClick={() => setIsShowSuggestions(0)}
                 aria-label="Close suggestions"

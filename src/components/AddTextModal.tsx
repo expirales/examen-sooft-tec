@@ -30,10 +30,16 @@ export default function AddTextModal<T extends { text: string; id: number }>({
         <h2>Add new phrase</h2>
         <textarea value={text} onChange={handleInputChange} placeholder="Write something here..." />
         <div className="cnt-buttons">
-          <button className="btn-close" onClick={onHandleClose}>
+          <button className="btn-close" onClick={onHandleClose} role="button" aria-label="Close">
             Close
           </button>
-          <button className="btn-save" onClick={handleSave} disabled={isEmptyText}>
+          <button
+            className="btn-save"
+            onClick={handleSave}
+            disabled={isEmptyText}
+            role="button"
+            aria-label="Save"
+          >
             Save
           </button>
         </div>

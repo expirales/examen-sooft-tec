@@ -13,6 +13,7 @@ export default function TextCard({ id, text, onHandleRemoveText }: TextCardProps
         className="btn-delete"
         onClick={() => onHandleRemoveText && onHandleRemoveText(id)}
         aria-label="Delete"
+        role="button"
       >
         Delete
       </button>

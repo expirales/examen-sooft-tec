@@ -78,6 +78,7 @@ export default function ListGrid<T>({
         ref={loaderRef}
         disabled={displayedItems.length === items.length}
         aria-label="Load More"
+        role="button"
       >
         Load More
       </button>
