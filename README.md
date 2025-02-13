@@ -54,6 +54,7 @@ the app is gonna run on http://localhost:5173/
 - [Sass](https://sass-lang.com/): Used for styling the application.
 - [Fuse.js](https://fusejs.io/): For fuzzy search functionality.
 - [Jest](https://jestjs.io/): Jest is a delightful JavaScript Testing Framework with a focus on simplicity.
+- [Husky](https://typicode.github.io/husky/): Automatically lint your commit messages, code, and run tests upon committing or pushing.
 
 ##### Versions:
 
