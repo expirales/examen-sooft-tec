@@ -156,6 +156,7 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useItems = () => {
   const context = useContext(ItemsContext)
   if (!context) throw new Error('useItems must be inside of ItemsProvider')
