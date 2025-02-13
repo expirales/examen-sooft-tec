@@ -1,0 +1,70 @@
+@use '../styles/variables' as *;
+@use '../styles/colors' as *;
+@use '../styles/global' as *;
+
+.cnt-search-bar {
+  display: flex;
+  flex-direction: column;
+
+  .cnt-input {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    button {
+      @include button;
+      position: absolute;
+      background-color: $border-color-primary;
+      border-radius: $space-3;
+      margin-right: $space-1;
+    }
+  }
+
+  .search-input {
+    height: 32px;
+    border-radius: $space-3;
+    width: 500px;
+    outline: 0;
+    border: 1px solid black;
+    padding: $space-1;
+    font-size: 1rem;
+  }
+
+  .cnt-suggestions {
+    position: absolute;
+    width: 480px;
+    max-height: 500px;
+    overflow-y: auto;
+    margin-top: 56px;
+    background-color: #1a1a1a;
+    border: 1px solid $border-color-primary;
+    border-radius: calc($space-1 / 2);
+    padding: $space-1;
+    list-style: none;
+
+    .cnt-buttons {
+      display: flex;
+      justify-content: space-between;
+
+      .btn-results,
+      .btn-close {
+        @include button;
+      }
+    }
+
+    li {
+      padding: $space-1;
+      border-radius: $space-1;
+      margin: calc($space-1 / 2);
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    li:hover {
+      background-color: #3d3c3c;
+      border-color: #646cff;
+    }
+  }
+}

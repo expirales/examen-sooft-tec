@@ -1,0 +1,19 @@
+.cnt-list-grid {
+    display: grid;
+    // grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+
+    @for $i from 1 through 10 {
+        &.column-#{$i} {
+            grid-template-columns: repeat(#{$i}, 1fr);
+        }
+    }
+
+    @for $i from 1 through 10 {
+        &.row-#{$i} {
+            grid-template-rows: repeat(#{$i}, 1fr);
+        }
+    }
+}
