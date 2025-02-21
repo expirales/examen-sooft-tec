@@ -1,11 +1,11 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import SearchBar from './SearchBar'
-import { useItems } from '../contexts/itemsContext'
-import { useFuseSearch } from '../hooks/useFuseSearch'
+import SearchBar from '.'
+import { useItems } from '../../contexts/itemsContext'
+import { useFuseSearch } from '../../hooks/useFuseSearch'
 
-jest.mock('../contexts/itemsContext')
-jest.mock('../hooks/useFuseSearch')
+jest.mock('../../contexts/itemsContext')
+jest.mock('../../hooks/useFuseSearch')
 
 describe('SearchBar', () => {
   const mockFilterItem = jest.fn()

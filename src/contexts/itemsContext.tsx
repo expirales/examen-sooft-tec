@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode, useRef } from 'react'
+import { createContext, useContext, useState, ReactNode, useRef, useMemo } from 'react'
 
 const textArray = [
   { id: 1, text: 'React is great' },
@@ -160,22 +160,21 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
     isFiltered.current = false
   }
 
-  return (
-    <ItemsContext.Provider
-      value={{
-        items: filteredItems,
-        addItem,
-        filterItem,
-        cleanFilterItems,
-        removeItem,
-        isFiltered: isFiltered.current,
-        filterAllItems,
-        totalItems: items.current.length,
-      }}
-    >
-      {children}
-    </ItemsContext.Provider>
+  const value = useMemo(
+    () => ({
+      items: filteredItems,
+      addItem,
+      filterItem,
+      cleanFilterItems,
+      removeItem,
+      isFiltered: isFiltered.current,
+      filterAllItems,
+      totalItems: items.current.length,
+    }),
+    [filteredItems]
   )
+
+  return <ItemsContext.Provider value={value}>{children}</ItemsContext.Provider>
 }
 
 /**

@@ -1,7 +1,8 @@
 import './SearchBar.scss'
-import { ChangeEvent, useState } from 'react'
-import { useFuseSearch } from '../hooks/useFuseSearch'
-import { useItems } from '../contexts/itemsContext'
+import { ChangeEvent, useCallback, useState } from 'react'
+import { useFuseSearch } from '../../hooks/useFuseSearch'
+import { useItems } from '../../contexts/itemsContext'
+import { useDebounce } from '../../hooks/useDebounce'
 
 /**
  * SearchBar component provides a search input field with suggestions and filtering capabilities.
@@ -57,34 +58,43 @@ import { useItems } from '../contexts/itemsContext'
 export default function SearchBar() {
   const { filterItem, filterAllItems, items, cleanFilterItems, isFiltered } = useItems()
   const [query, setQuery] = useState('')
+  const debouncedQuery = useDebounce(query, 1000)
   const [isShowSuggestions, setIsShowSuggestions] = useState(0)
 
   const filteredItems = useFuseSearch({
     data: items,
     keys: ['text', 'id'],
-    query,
+    query: debouncedQuery,
+    minQueryLength: 5,
   })
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setQuery(value)
-    if (value.length >= 3) {
-      setIsShowSuggestions(filteredItems.length)
-    } else {
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value
+      setQuery(value)
+      if (value.length >= 3) {
+        setIsShowSuggestions(filteredItems.length)
+      } else {
+        setIsShowSuggestions(0)
+      }
+    },
+    [filteredItems.length]
+  )
+
+  const handleFilterItem = useCallback(
+    (id: number) => {
+      filterItem(id)
       setIsShowSuggestions(0)
-    }
-  }
+    },
+    [filterItem]
+  )
 
-  const handleFilterItem = (id: number) => {
-    filterItem(id)
-    setIsShowSuggestions(0)
-  }
-
-  const handleFilterAllItems = () => {
+  const handleFilterAllItems = useCallback(() => {
     const ids = filteredItems.map((item) => item.id)
     filterAllItems(ids)
     setIsShowSuggestions(0)
-  }
+  }, [filterAllItems, filteredItems])
+
   const handleCleanFilters = () => {
     setQuery('')
     if (isFiltered) {

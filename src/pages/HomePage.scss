@@ -28,5 +28,10 @@
       font-size: 1.2em;
       background-color: transparent;
     }
+    .btn-clean {
+      @include button;
+      align-self: flex-start;
+      height: 48px;
+    }
   }
 }

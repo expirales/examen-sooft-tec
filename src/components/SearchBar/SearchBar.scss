@@ -1,6 +1,6 @@
-@use '../styles/variables' as *;
-@use '../styles/colors' as *;
-@use '../styles/global' as *;
+@use '../../styles/variables' as *;
+@use '../../styles/colors' as *;
+@use '../../styles/global' as *;
 
 .cnt-search-bar {
   display: flex;
@@ -51,6 +51,7 @@
     border-radius: calc($space-1 / 2);
     padding: $space-1;
     list-style: none;
+    z-index: 1;
 
     span {
       float: inline-end;
@@ -85,5 +86,9 @@
         }
       }
     }
+  }
+  &:hover {
+    border-radius: 32px;
+    box-shadow: 0 0 10px rgba(178, 175, 175, 0.5);
   }
 }

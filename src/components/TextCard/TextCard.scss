@@ -1,0 +1,59 @@
+@use '../../styles/global.scss' as *;
+@use '../../styles/colors.scss' as *;
+@use '../../styles/variables.scss' as *;
+
+.cnt-text-card {
+  border: 2px solid #ccc;
+  border-radius: $space-1;
+  padding: $space-1;
+  max-height: 124px;
+  height: 124px;
+
+  .cnt-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: $space-3;
+      left: 0;
+      width: 100%;
+      border-bottom: 1px solid #444343;
+    }
+  }
+  .id {
+    margin: 0;
+    width: fit-content;
+    border-radius: $space-2;
+    padding: 0 4px;
+    font-size: $space-1;
+    background: white;
+    color: black;
+  }
+  p {
+    margin-top: $space-2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(178, 175, 175, 0.5);
+  }
+
+  .btn-delete {
+    @include button(false);
+    gap: $space-1;
+    display: flex;
+    padding: 0.1em 0.5em;
+    background: #b76767;
+    font-size: 0.6em;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}

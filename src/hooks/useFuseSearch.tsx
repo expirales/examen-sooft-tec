@@ -5,6 +5,7 @@ type UseFuseSearchProps<T> = {
   data: T[]
   keys: Array<keyof T>
   query: string
+  minQueryLength: number
   options?: IFuseOptions<T>
 }
 
@@ -27,7 +28,13 @@ type UseFuseSearchProps<T> = {
  * const results = useFuseSearch({ data, keys, query, options });
  * // results will contain items that match the query
  */
-export function useFuseSearch<T>({ data, keys, query, options }: UseFuseSearchProps<T>): T[] {
+export function useFuseSearch<T>({
+  data,
+  keys,
+  query,
+  options,
+  minQueryLength = 3,
+}: UseFuseSearchProps<T>): T[] {
   const fuse = useMemo(() => {
     return new Fuse(data, {
       keys: keys as Array<FuseOptionKey<T>>,
@@ -37,9 +44,9 @@ export function useFuseSearch<T>({ data, keys, query, options }: UseFuseSearchPr
   }, [data, keys, options])
 
   const results = useMemo(() => {
-    if (!query) return data
+    if (!query || query.length < minQueryLength) return data
     return fuse.search(query).map((result) => result.item)
-  }, [query, data, fuse])
+  }, [query, minQueryLength, data, fuse])
 
   return results
 }

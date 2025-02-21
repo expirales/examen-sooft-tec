@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import TextCard from './TextCard'
+import TextCard from '.'
 
 describe('TextCard', () => {
   const mockId = 12345

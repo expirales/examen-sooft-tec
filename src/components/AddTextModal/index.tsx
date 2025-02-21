@@ -1,6 +1,7 @@
 import './AddTextModal.scss'
-import { randomId } from '../utils/randomId'
+import { randomId } from '../../utils/randomId'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { cssClassNames } from '../../utils/cssClassNames'
 
 type AddTextModalProps<T extends { text: string; id: number }> = {
   onHandleClose: () => void
@@ -20,6 +21,8 @@ type AddTextModalProps<T extends { text: string; id: number }> = {
  *
  * @returns {JSX.Element} The rendered AddTextModal component.
  */
+const TEXT_MIN_LENGTH = 3
+const TEXT_MAX_LENGTH = 120
 export default function AddTextModal<T extends { text: string; id: number }>({
   onHandleClose,
   onHandleSubmit,
@@ -27,9 +30,13 @@ export default function AddTextModal<T extends { text: string; id: number }>({
 }: AddTextModalProps<T>) {
   const [text, setText] = useState('')
   const inputRef = useRef<HTMLTextAreaElement>(null)
+  const availableTextChars = useRef(TEXT_MAX_LENGTH)
   const isEmptyText = text.trim() === ''
+  const isTextMinLengthOk = text.length >= TEXT_MIN_LENGTH
   const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setText(e.target.value)
+    const newText = truncateText(e.target.value, TEXT_MAX_LENGTH)
+    setText(newText)
+    availableTextChars.current = TEXT_MAX_LENGTH - newText.length
   }
 
   const handleSave = () => {
@@ -52,6 +59,31 @@ export default function AddTextModal<T extends { text: string; id: number }>({
           placeholder="Write something here..."
           ref={inputRef}
         />
+        <span className="characters-available">
+          (<b>{availableTextChars.current})</b> characters available.
+        </span>
+        <ul className="text-requirements">
+          <li
+            className={cssClassNames('requirement', {
+              required: !isEmptyText,
+            })}
+          >
+            <sup>*</sup>The text is required{' '}
+            {!isEmptyText ? <b className="check">✓</b> : <b className="error">×</b>}
+          </li>
+          <li
+            className={cssClassNames('requirement', {
+              ['min-length-ok']: isTextMinLengthOk && !isEmptyText,
+            })}
+          >
+            <sup>*</sup>The text must contain at least 3 characters.{' '}
+            {isTextMinLengthOk && !isEmptyText ? (
+              <b className="check">✓</b>
+            ) : (
+              <b className="error">×</b>
+            )}
+          </li>
+        </ul>
         <div className="cnt-buttons">
           <button
             className="btn-close"
@@ -76,4 +108,8 @@ export default function AddTextModal<T extends { text: string; id: number }>({
       </div>
     </div>
   )
+}
+
+function truncateText(text: string, maxChars: number): string {
+  return text.length > maxChars ? text.substring(0, maxChars) : text
 }

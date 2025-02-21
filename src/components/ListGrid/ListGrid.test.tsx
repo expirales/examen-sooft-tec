@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import ListGrid from './ListGrid'
+import ListGrid from '.'
 import '@testing-library/jest-dom'
 import 'intersection-observer'
 

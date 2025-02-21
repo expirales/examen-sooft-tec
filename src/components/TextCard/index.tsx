@@ -17,16 +17,19 @@ type TextCardProps = {
 export default function TextCard({ id, text, onHandleRemoveText }: TextCardProps) {
   return (
     <article key={id} className="cnt-text-card" data-testid="text-card">
+      <div className="cnt-title">
+        <h6 className="id"># {id}</h6>
+        <button
+          title="Delete"
+          className="btn-delete"
+          onClick={() => onHandleRemoveText && onHandleRemoveText(id)}
+          aria-label="Delete"
+          role="button"
+        >
+          Delete
+        </button>
+      </div>
       <p>{text}</p>
-      <button
-        title="Delete"
-        className="btn-delete"
-        onClick={() => onHandleRemoveText && onHandleRemoveText(id)}
-        aria-label="Delete"
-        role="button"
-      >
-        Delete
-      </button>
     </article>
   )
 }

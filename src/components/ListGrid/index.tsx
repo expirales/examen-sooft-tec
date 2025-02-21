@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
-import { cssClassNames } from '../utils/cssClassNames'
+import { cssClassNames } from '../../utils/cssClassNames'
 import './ListGrid.scss'
 
 type ListGridProps<T> = {

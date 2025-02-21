@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import AddTextModal from './AddTextModal'
-import { randomId } from '../utils/randomId'
+import AddTextModal from '.'
+import { randomId } from '../../utils/randomId'
 
-jest.mock('../utils/randomId')
+jest.mock('../../utils/randomId')
 
 describe('AddTextModal', () => {
   const onHandleClose = jest.fn()
