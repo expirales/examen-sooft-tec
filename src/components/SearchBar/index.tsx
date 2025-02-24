@@ -65,7 +65,7 @@ export default function SearchBar() {
     data: items,
     keys: ['text', 'id'],
     query: debouncedQuery,
-    minQueryLength: 5,
+    minQueryLength: 3,
   })
 
   const handleChange = useCallback(
